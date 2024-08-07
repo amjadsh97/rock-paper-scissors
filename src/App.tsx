@@ -3,9 +3,9 @@ import logo from "../public/images/logo-bonus.svg";
 import pentagon from "../public/images/bg-pentagon.svg";
 import closeIcon from "../public/images/icon-close.svg";
 import rulesIcon from "../public/images/image-rules-bonus.svg";
+import Modal from "./components/Modal";
 import "./reset.css";
 import './App.css';
-import Modal from "./components/Modal";
 
 type Option = {
   name: string;
@@ -31,7 +31,6 @@ function App() {
   const [resultMessage, setResultMessage] = useState<string | null>(null);
   const [winner, setWinner] = useState<string>("");
   const [isRulesOpened, setIsRulesOpened] = useState(false);
-  const [isFlashing, setIsFlashing] = useState(false);
 
   const winningConditions: Record<string, string[]> = {
     Rock: ["Scissors", "Lizard"],
@@ -64,11 +63,10 @@ function App() {
     }
   }
 
-  console.log({isFlashing})
+
   useEffect(() => {
     if (selectedOption) {
       // Start with pseudo-element visible
-      setIsFlashing(false);
 
       const flashDuration = 2000;
       const flashInterval = 200;
@@ -79,9 +77,7 @@ function App() {
       const startTime = Date.now();
 
       // Show pseudo-element briefly before flashing
-      const showPseudoElementTimeout = setTimeout(() => {
-        setIsFlashing(true);
-      }, 2000); // Adjust timing to fit your needs
+
 
       const flashIntervalId = setInterval(() => {
         setFlashingOption(shuffledOptions[index]);
@@ -89,8 +85,6 @@ function App() {
 
         if (Date.now() - startTime > flashDuration) {
           clearInterval(flashIntervalId);
-          clearTimeout(showPseudoElementTimeout);
-          setIsFlashing(false); // Stop flashing
           const finalIndex = Math.floor(Math.random() * shuffledOptions.length);
           setFinalOption(shuffledOptions[finalIndex]);
 
@@ -101,7 +95,6 @@ function App() {
 
       return () => {
         clearInterval(flashIntervalId);
-        clearTimeout(showPseudoElementTimeout);
       };
     }
   }, [selectedOption]);
@@ -134,9 +127,9 @@ function App() {
       <header></header>
       <main>
         <div className="app-header">
-          <div className="logo">
+          <h1 className="logo">
             <img src={logo} alt="logo"/>
-          </div>
+          </h1>
           <div className="score">
             <span className='score-label'>score</span>
             <span className='score-value'>12</span>
