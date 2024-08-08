@@ -31,6 +31,7 @@ function App() {
   const [resultMessage, setResultMessage] = useState<string | null>(null);
   const [winner, setWinner] = useState<string>("");
   const [isRulesOpened, setIsRulesOpened] = useState(false);
+  const [score, setScore] = useState(0);
 
   const winningConditions: Record<string, string[]> = {
     Rock: ["Scissors", "Lizard"],
@@ -56,6 +57,7 @@ function App() {
 
     if (winningConditions[playerSelection].includes(computerSelection)) {
       setWinner("human");
+      setScore(prev => prev + 1);
       return "YOU WIN";
     } else {
       setWinner("computer");
@@ -132,7 +134,7 @@ function App() {
           </h1>
           <div className="score">
             <span className='score-label'>score</span>
-            <span className='score-value'>12</span>
+            <span className='score-value'>{score}</span>
           </div>
         </div>
 
