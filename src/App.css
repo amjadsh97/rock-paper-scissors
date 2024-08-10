@@ -121,6 +121,23 @@ h2.game-board__title { color: white; font-size: clamp(1.5rem,4vw,2.4rem); margin
   .game-board__item .option { width: 133px; height: 133px; margin: unset; }
 
 
+  .game-board {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .result-wrapper {
+  }
+
+  .game-board .game-board__item.computer-choice .option:after {
+    content: unset;
+  }
+
+  h2.game-board__title {
+    margin-bottom: 20px;
+  }
+
 
   .option > .image-wrapper img {width: 40px;}
 
@@ -136,11 +153,17 @@ h2.game-board__title { color: white; font-size: clamp(1.5rem,4vw,2.4rem); margin
 
   .game-board.game-over { gap: 0px; flex-wrap: wrap; justify-content: center; width: 100%; }
 
-  .result-wrapper { order: 3; }
+  .result-wrapper {order: 3;width: 100%;}
 
-  .game-board__item { align-items: center; flex-direction: column-reverse; margin-bottom: auto; }
+  .game-board__item {align-items: center;flex-direction: column-reverse;margin-bottom: auto;}
 
   .game-board__title { margin: 20px 0 0; }
-  .game-board__item.user-choice { margin-inline-end:auto; }
+  .game-board__item.user-choice {margin-inline-end: unset;}
+
+  @keyframes ripple { 0% { box-shadow: 0 0 #ffffff4d,0 0 #ffffff4d,0 0 #ffffff4d; }
+    75% { box-shadow: 0 0 0 30px #fff0,0 0 0 70px #fff0,0 0 0 100px #fff0; }
+    100% { box-shadow: 0 0 #fff0,0 0 #fff0,0 0 #fff0
+    }
+  }
 
 }
